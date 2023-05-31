@@ -14,7 +14,16 @@ export function RenderMd({ children }: RenderMd) {
       rehypePlugins={[rehypeHighlight, rehypeRaw]}
       components={{
         h1: ({ node, ...props }) => (
-          <h1 className="text-2xl font-medium">{props.children}</h1>
+          <h1 className="text-2xl mb-4 font-bold">{props.children}</h1>
+        ),
+        h2: ({ node, ...props }) => (
+          <h2 className="text-2xl mb-4 font-bold">{props.children}</h2>
+        ),
+        h3: ({ node, ...props }) => (
+          <h3 className="text-xl mb-4 font-bold">{props.children}</h3>
+        ),
+        p: ({ node, ...props }) => (
+          <p className="text-xl mb-4 ">{props.children}</p>
         ),
         a: ({ node, ...props }) => (
           <Link
@@ -30,11 +39,18 @@ export function RenderMd({ children }: RenderMd) {
           <ul className="list-disc ml-4 space-y-1 text-lg">{props.children}</ul>
         ),
         li: ({ node, ...props }) => <li>{props.children}</li>,
-        // img: ({ node, ...props }) => {
-        //   return (
-        //     <Image src={props.src ?? ""} width={500} height={500} alt={""} />
-        //   );
-        // },
+        br: ({ node, ...props }) => (
+          <>
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+          </>
+        ),
       }}
     >
       {children}

@@ -1,9 +1,9 @@
 import classNames from "classnames";
-import { Roboto } from "next/font/google";
+import { Inter } from "next/font/google";
 
 import "./globals.css";
 
-const roboto = Roboto({
+const roboto = Inter({
   weight: ["100", "300", "400", "500", "700", "900"],
   subsets: ["latin"],
 });
@@ -22,7 +22,7 @@ export default function RootLayout({
       <body
         className={classNames(
           roboto.className,
-          "flex w-full h-full bg-grid bg-lg font-roboto"
+          "flex w-full h-full bg-grid bg-lg font-inter"
         )}
       >
         {children}

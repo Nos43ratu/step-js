@@ -1,15 +1,15 @@
 ---
-title: Введение в javascript
-date: 26-05-2023
+title: DOM
+date: 31-05-2023
 link: /step/01-basics/
 ---
 
-# [DOM](/lesson/04-dom/)
+# [DOM](/lesson/04-dom)
 
-<br/>
-
-- [Слайды](/files/01-entry.pptx)
-- [Домашнее задание 1](/files/homework_1.docx), [Домашнее задание 2](/files/homework_2.docx)
+- [Домашнее задание](/lesson/04-dom/home)
 - Доп материалы
-    - [Переменные](https://learn.javascript.ru/variables)
-    - [alert, prompt, confirm](https://learn.javascript.ru/alert-prompt-confirm) 
+  - [DOM](https://learn.javascript.ru/dom-nodes)
+  - [< input /> event change](https://learn.javascript.ru/events-change-input)
+  - [Selecting DOM nodes](https://learn.javascript.ru/searching-elements-dom)
+  - [Node attributes](https://learn.javascript.ru/dom-attributes-and-properties)
+  - [Node styles](https://learn.javascript.ru/styles-and-classes)

@@ -16,7 +16,7 @@ module.exports = {
         lg: "48px 48px",
       },
       fontFamily: {
-        roboto: ["Roboto", "sans-serif"],
+        inter: ["Inter", "sans-serif"],
       },
     },
   },

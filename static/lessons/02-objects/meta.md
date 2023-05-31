@@ -1,15 +1,12 @@
 ---
-title: Введение в javascript
+title: Циклы,Фукнции, Массивы и Объекты
 date: 26-05-2023
 link: /step/01-basics/
 ---
 
-# Введение в javascript
+# Циклы,Фукнции, Массивы и Объекты
 
-<br/>
-
-- [Слайды](/files/01-entry.pptx)
-- [Домашнее задание 1](/files/homework_1.docx), [Домашнее задание 2](/files/homework_2.docx)
+- [Слайды](/files/02-entry.pptx)
 - Доп материалы
-    - [Переменные](https://learn.javascript.ru/variables)
-    - [alert, prompt, confirm](https://learn.javascript.ru/alert-prompt-confirm) 
+  - [Функции](https://learn.javascript.ru/function-basics)
+  - [Объекты](https://learn.javascript.ru/object)
