@@ -2,6 +2,23 @@ import classNames from "classnames";
 import fs from "fs";
 import matter from "gray-matter";
 import { RenderMd } from "@/entities/render-md";
+//
+// export async function generateStaticParams() {
+//   const lessons = await fs.promises.readdir(`static/lessons/`);
+//   const homeworks = lessons.map((lesson) => {
+//     const item = fs.readdirSync(`static/lessons/${lesson}`);
+//
+//     return{
+//         lesson: lesson,
+//         homework: item
+//     }
+//   })
+//
+//   return lessons.map((lesson) => ({
+//     lesson: lesson,
+//       homework:
+//   }));
+// }
 
 async function getHomework(lesson: string, homework: string) {
   const lesson_raw = await fs.promises.readFile(
