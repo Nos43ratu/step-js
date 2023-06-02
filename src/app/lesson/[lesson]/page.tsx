@@ -2,30 +2,7 @@ import classNames from "classnames";
 import fs from "fs";
 import matter from "gray-matter";
 import { RenderMd } from "@/entities/render-md";
-
-// export async function generateStaticParams() {
-//   const lessons = await fs.promises.readdir(`static/lessons/`);
-//
-//   const indexes = lessons.filter((lesson) => {
-//     const item = fs.readdirSync(`static/lessons/${lesson}`);
-//
-//     if (item.includes("index.md")) {
-//       return lesson;
-//     }
-//   });
-//
-//   return indexes.map((lesson) => ({
-//     lesson: lesson,
-//   }));
-// }
-
-async function getLesson(lesson: string) {
-  const lesson_raw = await fs.promises.readFile(
-    `static/lessons/${lesson}/index.md`
-  );
-
-  return matter(lesson_raw);
-}
+import { getLesson } from "@/shared/lib";
 
 export default async function Page({ params }: { params: { lesson: string } }) {
   const lesson = await getLesson(params.lesson);

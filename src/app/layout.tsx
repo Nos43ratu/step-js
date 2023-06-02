@@ -3,7 +3,7 @@ import { Inter } from "next/font/google";
 
 import "./globals.css";
 
-const roboto = Inter({
+const inter = Inter({
   weight: ["100", "300", "400", "500", "700", "900"],
   subsets: ["latin"],
 });
@@ -21,7 +21,7 @@ export default function RootLayout({
     <html lang="en" className="h-full">
       <body
         className={classNames(
-          roboto.className,
+          inter.className,
           "flex w-full h-full bg-grid bg-lg font-inter"
         )}
       >
