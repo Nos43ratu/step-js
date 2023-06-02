@@ -13,7 +13,7 @@ ENV NEXT_TELEMETRY_DISABLED 1
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
-RUN pnpm build
+RUN yarn build
 
 
 FROM base AS runner
