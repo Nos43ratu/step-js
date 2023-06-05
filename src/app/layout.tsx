@@ -1,11 +1,16 @@
 import classNames from "classnames";
-import { Inter } from "next/font/google";
-
-import "./globals.css";
+import { Inter, Roboto } from "next/font/google";
+import { Header } from "@/feature/header";
+import "./styles/globals.css";
 
 const inter = Inter({
   weight: ["100", "300", "400", "500", "700", "900"],
-  subsets: ["latin"],
+  subsets: ["cyrillic-ext"],
+});
+
+const robot = Roboto({
+  weight: ["100", "300", "400", "500", "700", "900"],
+  subsets: ["cyrillic-ext"],
 });
 
 export const metadata = {
@@ -21,10 +26,12 @@ export default function RootLayout({
     <html lang="en" className="h-full">
       <body
         className={classNames(
-          inter.className,
-          "flex w-full h-full bg-grid bg-lg font-inter"
+          robot.className,
+          "flex flex-col w-full h-full bg-grid bg-lg font-inter"
         )}
       >
+        <Header />
+
         {children}
       </body>
     </html>
