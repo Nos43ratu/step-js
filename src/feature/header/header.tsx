@@ -1,4 +1,3 @@
-import { ToggleTheme } from "@/entities/theme/toggle-theme";
 import { LessonTitle } from "@/entities/lesson/lesson-title";
 
 export function Header() {
