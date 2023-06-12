@@ -72,12 +72,27 @@ type RequestParams = {
 
 export async function GET(request: Request, params: RequestParams) {
   const { id } = params.params;
+
   const user = users.find((user) => user.id === parseInt(id));
+
   if (user) {
     return new Response(JSON.stringify(user), {
-      headers: { "content-type": "application/json" },
+      headers: {
+        "content-type": "application/json",
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+        "Access-Control-Allow-Headers": "Content-Type",
+      },
     });
   } else {
-    return new Response("User not found", { status: 404 });
+    return new Response("User not found", {
+      status: 404,
+      headers: {
+        "content-type": "application/json",
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+        "Access-Control-Allow-Headers": "Content-Type",
+      },
+    });
   }
 }
