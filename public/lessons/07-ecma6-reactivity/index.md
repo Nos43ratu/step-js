@@ -279,3 +279,95 @@ filmsState.subscribe(renderAvgRating);
 
 renderAvgRating();
 ```
+
+## Домашнее задание 1
+
+Создать приложение которая отображает нажатые клавиши на странице.
+
+- Создать экземпляр класса State с начальным состоянием { keys: [] }. Этот экземпляр будет представлять состояние нажатых клавиш в приложении.
+- Создать массив всех или некоторых клавиш клавиатуры.
+- Отрендерить клавиши на странице внутри элемента с классом .keys.
+- элемент key должен содержать текстовое содержимое равное названию клавиши и класс key
+- добавить слушатель события keydown на window, который будет добавлять нажатую клавишу в состояние keysState с помощью метода setState.
+- добавить слушатель события keyup на window, который будет удалять нажатую клавишу из состояния keysState с помощью метода setState.
+- когда состояние keysState обновляется, вызывать функцию renderKeys, которая будет изменять автивные клавиши на странице на основе текущего состояния keysState.
+- когда кнопка активна добавить ей класс active, иначе удалить класс active. Для этого можно использовать метод classList.toggle.
+
+```html
+<main>
+  <h1>Key logger</h1>
+
+  <div class="keys"></div>
+</main>
+```
+
+```css
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  width: 100%;
+  display: flex;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+  width: 100%;
+  gap: 24px;
+}
+
+h1 {
+  margin: 0;
+}
+
+.keys {
+  display: flex;
+  flex-direction: column;
+  padding: 8px;
+  gap: 16px;
+  border: 1px solid black;
+}
+
+.key {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid black;
+  padding-bottom: 4px;
+}
+
+.key.active {
+  color: red;
+}
+```
+
+```js
+const keysState = new State({
+  keys: ["q", "w", "e", "r", "t", "y", "u", "i", "o", "p"],
+  activeKeys: [],
+});
+
+const keys = document.querySelector(".keys");
+
+const renderKeys = () => {}; // Функция для отрисовки клавишы keysState.keys
+
+renderKeys(); // Изначальная отрисовка клавиш
+
+const updateActiveKeys = () => {}; // Функция для обновления активных клавиш
+
+keysState.listen(updateActiveKeys); // Подписываемся на изменения в стейте
+
+window.addEventListener("keydown", (event) => {
+  // Добавляем нажатую клавишу в состояние
+});
+
+window.addEventListener("keyup", (event) => {
+  // Удаляем нажатую клавишу из состояния
+});
+```
