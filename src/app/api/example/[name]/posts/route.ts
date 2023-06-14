@@ -55,7 +55,6 @@ export async function POST(request: Request, { params }: Params) {
 
   if (cache.has(name)) {
     const body = (await request.json()) as POSTRequest["body"];
-    console.log(body);
 
     const data = cache.get(name) as {
       name: string;
