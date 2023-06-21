@@ -27,7 +27,7 @@ export default function RootLayout({
       <body
         className={classNames(
           robot.className,
-          "flex flex-col w-full h-full bg-grid bg-lg font-inter"
+          "flex flex-col w-full h-full bg-grid bg-lg font-inter space-y-2"
         )}
       >
         <Header />
