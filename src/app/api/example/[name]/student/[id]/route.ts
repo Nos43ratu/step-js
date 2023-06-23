@@ -19,18 +19,18 @@ export async function DELETE(request: Request, { params }: Params) {
 
   if (cache.has(name)) {
     const data = cache.get(name) as {
-      name: string;
-      subject: [{ title: string; content: string; id: string }];
+      subject: string;
+      students: [{ title: string; content: string; id: string }];
     };
 
-    const students = data.subject.filter((post: any) => post.id !== id);
+    const students = data.students.filter((post: any) => post.id !== id);
+
+    console.log("has");
 
     cache.set(name, {
-      name,
+      subject: name,
       students,
     });
-
-    console.log(cache.get(name));
 
     return new Response(JSON.stringify({}), {
       status: 200,
@@ -59,11 +59,11 @@ export async function PUT(request: Request, { params }: Params) {
     const body = (await request.json()) as POSTRequest["body"];
 
     const data = cache.get(name) as {
-      name: string;
-      subject: [{ title: string; content: string; id: string }];
+      subject: string;
+      students: [{ title: string; content: string; id: string }];
     };
 
-    const subject = data.subject.map((post: any) => {
+    const students = data.students.map((post: any) => {
       if (post.id === id) {
         return {
           ...post,
@@ -75,8 +75,8 @@ export async function PUT(request: Request, { params }: Params) {
     });
 
     cache.set(name, {
-      name,
-      subject,
+      subject: name,
+      students,
     });
 
     return new Response(JSON.stringify({}), {

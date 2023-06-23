@@ -55,11 +55,9 @@ export async function POST(request: Request, { params }: Params) {
     const body = (await request.json()) as POSTRequest["body"];
 
     const data = cache.get(name) as {
-      name: string;
+      subject: string;
       students: [{ title: string; content: string; id: string }];
     };
-
-    console.log(data, body);
 
     data.students.push({ id: uuidv4(), ...body });
 
@@ -77,8 +75,8 @@ export async function POST(request: Request, { params }: Params) {
     const body = (await request.json()) as POSTRequest["body"];
 
     const data = {
-      name,
-      subject: [
+      subject: name,
+      students: [
         {
           id: uuidv4(),
           ...body,
