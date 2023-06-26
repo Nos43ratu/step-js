@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <link rel="stylesheet" href="https://adilkairolla.dev/step/static/css" />
+  <body>
+    <main>
+      <h1>adil`s posts:</h1>
+
+      <div class="posts"></div>
+
+      <form id="add-post">
+        <h2>Add post</h2>
+        <input type="text" name="title" placeholder="Post title" />
+        <input type="text" name="content" placeholder="Post content" />
+        <button type="submit">Add post</button>
+      </form>
+    </main>
+  </body>
+
+  <script>
+    async function getPosts() {
+      const data = await fetch(
+        "https://adilkairolla.dev/step/api/example/adil/posts"
+      ).then((res) => res.json());
+
+      return data;
+    }
+
+    async function renderPosts() {
+      const data = await getPosts();
+
+      const posts = data.posts;
+
+      const postsContainer = document.querySelector(".posts");
+
+      postsContainer.innerHTML = "";
+
+      if (posts.length === 0) {
+        postsContainer.innerHTML = "<h2>No posts yet</h2>";
+        return;
+      }
+
+      posts.forEach((post) => {
+        const postElement = document.createElement("div");
+        postElement.classList.add("post");
+
+        postElement.innerHTML = `
+            <h2 class="post-title">${post.title}</h2>
+            <p class="post-content">${post.content}</p>
+        `;
+
+        const editButton = document.createElement("button");
+        editButton.innerText = "Edit";
+
+        editButton.addEventListener("click", async () => {
+          console.log(post);
+
+          const editPostForm = document.createElement("form");
+          editPostForm.id = "edit-post";
+
+          editPostForm.innerHTML = `
+                <h2>Edit post</h2>
+                <input type="text" name="title" placeholder="Post title" value="${post.title}" />
+                <input type="text" name="content" placeholder="Post content" value="${post.content}" />
+                <button type="submit">Save post</button>
+            `;
+
+          editPostForm.addEventListener("submit", async (e) => {
+            e.preventDefault();
+
+            const formData = new FormData(editPostForm);
+
+            const data = await fetch(
+              `https://adilkairolla.dev/step/api/example/adil/post/${post.id}`,
+              {
+                method: "PUT",
+                body: JSON.stringify(Object.fromEntries(formData.entries())),
+              }
+            ).then((res) => {
+              if (res.status === 200) {
+                renderPosts();
+              }
+            });
+
+            e.target.reset();
+          });
+
+          postElement.innerHTML = "";
+          postElement.appendChild(editPostForm);
+        });
+
+        const deleteButton = document.createElement("button");
+        deleteButton.innerText = "Delete";
+
+        deleteButton.addEventListener("click", async () => {
+          const data = await fetch(
+            `https://adilkairolla.dev/step/api/example/adil/post/${post.id}`,
+            {
+              method: "DELETE",
+            }
+          ).then((res) => {
+            if (res.status === 200) {
+              renderPosts();
+            }
+          });
+        });
+
+        postElement.appendChild(editButton);
+        postElement.appendChild(deleteButton);
+
+        postsContainer.appendChild(postElement);
+      });
+    }
+
+    renderPosts();
+
+    const addPostForm = document.querySelector("#add-post");
+
+    addPostForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const formData = new FormData(addPostForm);
+
+      const data = await fetch(
+        "https://adilkairolla.dev/step/api/example/adil/posts",
+        {
+          method: "POST",
+          body: JSON.stringify(Object.fromEntries(formData.entries())),
+        }
+      ).then((res) => {
+        if (res.status === 200) {
+          renderPosts();
+        }
+      });
+
+      e.target.reset();
+    });
+  </script>
+</html>

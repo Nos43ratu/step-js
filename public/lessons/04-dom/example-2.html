@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Example of task-2</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: system-ui, sans-serif;
+        color: black;
+        background-color: white;
+      }
+
+      main {
+        display: flex;
+        flex-direction: column;
+        padding: 16px;
+        gap: 16px;
+        max-width: 700px;
+      }
+
+      h1 {
+        font-size: 24px;
+        margin: 0;
+      }
+
+      .head {
+        display: flex;
+        justify-content: space-between;
+      }
+
+      .cart {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+      }
+
+      .cart-item {
+        width: 100%;
+        display: flex;
+      }
+
+      .cart-item_input + .cart-item_label {
+        font-size: 16px;
+      }
+
+      .cart-item_input:checked + .cart-item_label {
+        color: gray;
+        text-decoration: line-through;
+      }
+
+      .cart-item_delete {
+        margin-left: auto;
+        display: none;
+      }
+
+      .cart-item_delete.active {
+        display: block;
+      }
+
+      .add {
+        display: flex;
+        margin-top: 48px;
+        flex-direction: column;
+        gap: 8px;
+        border: 1px solid black;
+        padding: 8px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <main>
+      <div>
+        <div class="head">
+          <h1>Покупки</h1>
+
+          <div class="actions">
+            <button id="select-all">Select all</button>
+            <button id="unselect-all">Unselect all</button>
+            <button id="edit">Edit</button>
+          </div>
+        </div>
+
+        <div id="cart" class="cart"></div>
+      </div>
+
+      <div class="add">
+        <h1>Добавить</h1>
+
+        <input id="add-input" type="text" class="add-input" />
+
+        <button id="add-button">Add</button>
+      </div>
+    </main>
+  </body>
+
+  <script>
+    const data = ["Хлеб", "Молоко", "Сыр"];
+
+    const cart = document.getElementById("cart");
+
+    let editActive = false;
+
+    function createCartItem(value) {
+      const label = document.createElement("label");
+      label.className = "cart-item";
+
+      const input = document.createElement("input");
+      input.type = "checkbox";
+      input.className = "cart-item_input";
+
+      label.append(input);
+
+      const span = document.createElement("span");
+      span.className = "cart-item_label";
+      span.innerHTML = value;
+
+      label.append(span);
+
+      const deleteButton = document.createElement("button");
+      deleteButton.className = "cart-item_delete";
+      if (editActive) {
+        deleteButton.classList.add("active");
+      }
+      deleteButton.innerHTML = "X";
+      deleteButton.onclick = function () {
+        label.remove();
+      };
+
+      label.append(deleteButton);
+
+      return label;
+    }
+
+    function render() {
+      data.forEach(function (item) {
+        const element = createCartItem(item);
+
+        cart.append(element);
+      });
+    }
+
+    render();
+
+    const selectAllButton = document.getElementById("select-all");
+    selectAllButton.addEventListener("click", function () {
+      const items = document.querySelectorAll(".cart-item");
+
+      items.forEach((elem) => {
+        elem.firstChild.checked = true;
+      });
+    });
+
+    const unSelectAllButton = document.getElementById("unselect-all");
+    unSelectAllButton.addEventListener("click", function () {
+      const items = document.querySelectorAll(".cart-item");
+
+      items.forEach((elem) => {
+        elem.firstChild.checked = false;
+      });
+    });
+
+    const editButton = document.getElementById("edit");
+    editButton.addEventListener("click", function () {
+      editActive = !editActive;
+
+      const buttons = document.querySelectorAll(".cart-item_delete");
+
+      buttons.forEach(function (button) {
+        button.classList.toggle("active", editActive);
+      });
+    });
+
+    let inputValue = "";
+
+    const addInput = document.getElementById("add-input");
+    addInput.addEventListener("input", function (event) {
+      const value = event.target.value;
+
+      inputValue = value;
+    });
+
+    const addButton = document.getElementById("add-button");
+    addButton.addEventListener("click", function () {
+      if (!inputValue) return;
+
+      const elem = createCartItem(inputValue);
+
+      cart.append(elem);
+      addInput.value = "";
+      inputValue = "";
+    });
+  </script>
+</html>

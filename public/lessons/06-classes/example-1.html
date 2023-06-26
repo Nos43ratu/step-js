@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Example of task-2</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: system-ui, sans-serif;
+        color: black;
+        background-color: white;
+      }
+
+      main {
+        display: flex;
+        flex-direction: column;
+        padding: 16px;
+        gap: 16px;
+      }
+
+      input {
+        font-size: 32px;
+      }
+
+      .search-results {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <main id="root"></main>
+  </body>
+
+  <script>
+    const data = [
+      "Apple",
+      "Orange",
+      "Banana",
+      "Pineapple",
+      "Mango",
+      "Strawberries",
+      "Watermelon",
+      "Kiwi",
+      "Peach",
+      "Pear",
+      "Grape",
+      "Cherry",
+    ];
+
+    class SearchInput {
+      constructor() {
+        this.data = data;
+        this.root = document.getElementById("root");
+        this.resultsWrapper = null;
+
+        this.renderInput();
+        this.renderWrapper();
+        this.renderResults("");
+      }
+
+      handleInput(event) {
+        const value = event.target.value;
+        this.renderResults(value);
+      }
+
+      renderInput() {
+        const input = document.createElement("input");
+        input.addEventListener("input", this.handleInput.bind(this));
+        this.root.appendChild(input);
+      }
+
+      renderWrapper() {
+        this.resultsWrapper = document.createElement("div");
+        this.resultsWrapper.id = "search-results";
+        this.resultsWrapper.className = "search-results";
+        this.root.appendChild(this.resultsWrapper);
+      }
+
+      renderResults(value) {
+        this.resultsWrapper.innerHTML = "";
+
+        this.data
+          .filter((e) => e.toLowerCase().includes(value.toLowerCase()))
+          .forEach((fruit) => {
+            const span = document.createElement("span");
+            span.textContent = fruit;
+            this.resultsWrapper.appendChild(span);
+          });
+      }
+    }
+
+    new SearchInput();
+  </script>
+</html>

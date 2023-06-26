@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Home</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <!--
+    Need a visual blank slate?
+    Remove all code in `styles.css`!
+  -->
+    <style>
+      :root {
+        --gray-light: #f9fafb;
+        --gray-medium: #f3f4f6;
+        --gray-dark: #d1d5db;
+
+        --accent-light: #6366f1;
+        --accent: #4f46e5;
+
+        --text-light: #6b7280;
+        --text-dark: #111827;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      html,
+      body {
+        font-family: system-ui, sans-serif;
+        background: var(--gray-medium);
+        height: 100%;
+        width: 100%;
+      }
+
+      main {
+        display: flex;
+        flex-direction: column;
+        padding: 32px;
+        gap: 16px;
+      }
+
+      .head {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      table {
+        background-color: white;
+        border-radius: 8px;
+        overflow: hidden;
+        border-collapse: collapse;
+        box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1),
+          0 2px 4px -2px rgb(0 0 0 / 0.1);
+      }
+
+      thead {
+        background-color: var(--gray-light);
+      }
+
+      th {
+        text-align: left;
+        padding: 14px 12px;
+        color: var(--text-dark);
+        font-size: 14px;
+        font-weight: 600;
+      }
+
+      th:first-of-type {
+        padding: 14px 12px 14px 24px;
+      }
+
+      th:last-of-type {
+        padding: 14px 24px 14px 12px;
+      }
+
+      tbody {
+        border-top: 1px solid var(--gray-dark);
+      }
+
+      tbody > tr {
+        border-top: 1px solid var(--gray-dark);
+      }
+
+      td {
+        text-align: left;
+        padding: 16px;
+        color: var(--text-dark);
+        font-size: 14px;
+      }
+
+      td:first-of-type {
+        padding: 16px 12px 16px 24px;
+      }
+
+      td:last-of-type {
+        padding: 16px 24px 16px 12px;
+        text-align: end;
+      }
+
+      .title {
+        font-weight: 500;
+      }
+
+      .price,
+      .amount {
+        color: var(--text-light);
+      }
+
+      button {
+        all: unset;
+        background-color: var(--accent);
+        color: white;
+        padding: 8px 12px;
+        border-radius: 6px;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+        text-align: center;
+      }
+
+      button:hover {
+        background: var(--accent-light);
+      }
+
+      button:focus {
+        box-shadow: 0 0 0 4px var(--gray-dark);
+      }
+
+      button.delete {
+        background-color: transparent;
+        color: var(--accent);
+      }
+
+      button.delete:hover {
+        color: red;
+      }
+
+      input {
+        all: unset;
+        padding: 6px 12px;
+        border-radius: 6px;
+        color: var(--text-dark);
+        box-shadow: inset 0 0 0 1px var(--gray-dark),
+          0 1px 2px 0 rgb(0 0 0 / 0.05);
+      }
+
+      input:focus {
+        box-shadow: inset 0 0 0 2px var(--accent), 0 1px 2px 0 rgb(0 0 0 / 0.05);
+      }
+
+      input:invalid {
+        box-shadow: inset 0 0 0 2px red, 0 1px 2px 0 rgb(0 0 0 / 0.05);
+      }
+
+      select {
+        all: unset;
+        padding: 6px 12px;
+        border-radius: 6px;
+        box-shadow: inset 0 0 0 1px var(--gray-dark),
+          0 1px 2px 0 rgb(0 0 0 / 0.05);
+      }
+
+      select:focus {
+        box-shadow: inset 0 0 0 2px var(--accent), 0 1px 2px 0 rgb(0 0 0 / 0.05);
+      }
+
+      label {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        font-size: 14px;
+      }
+
+      label.file {
+        all: unset;
+        background-color: var(--accent);
+        color: white;
+        padding: 8px 12px;
+        border-radius: 6px;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+        text-align: center;
+      }
+
+      label.file:hover {
+        background: var(--accent-light);
+      }
+
+      label.file > input {
+        display: none;
+      }
+
+      .modal {
+        display: none;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+      }
+
+      .modal .overlay {
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.4);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .modal.active {
+        display: block;
+      }
+
+      .status {
+        font-weight: 500;
+        color: white;
+        border-radius: 99999px;
+        padding: 4px 8px;
+        border-width: 1px;
+        border-style: solid;
+      }
+      .status.delivered {
+        background-color: rgb(240 253 244 / 0.5);
+        border-color: rgb(22 163 74 / 0.1);
+        color: rgb(21 128 61);
+      }
+      .status.canceled {
+        background-color: rgb(254, 242, 242, 0.5);
+        border-color: rgb(220 38 38 / 0.1);
+        color: rgb(185 28 28);
+      }
+      .status.delivering {
+        background-color: rgb(254 252 232 / 0.5);
+        border-color: rgb(202 138 4 / 0.2);
+        color: rgb(133 77 14);
+      }
+
+      form {
+        background: white;
+        padding: 20px 24px;
+        gap: 12px;
+        border-radius: 6px;
+        box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1),
+          0 2px 4px -2px rgb(0 0 0 / 0.1);
+        width: 360px;
+        display: flex;
+        flex-direction: column;
+      }
+
+      form > *:last-child {
+        margin-top: 24px;
+      }
+
+      form > *:first-child {
+        margin-bottom: 12px;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <div class="head">
+        <h1>Cargo accounting system</h1>
+
+        <div>
+          <button id="add-item">Add item</button>
+
+          <label class="file">
+            <span>Load from file</span>
+
+            <input type="file" id="file-input" />
+          </label>
+        </div>
+      </div>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Price</th>
+            <th>Amount</th>
+            <th>Status</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody id="tbody"></tbody>
+      </table>
+    </main>
+
+    <div id="modal" class="modal">
+      <div id="overlay" class="overlay"></div>
+    </div>
+  </body>
+
+  <script>
+    class Modal {
+      modal = document.getElementById("modal");
+      overlay = document.getElementById("overlay");
+
+      constructor() {
+        overlay.onclick = (e) => {
+          if (e.target === this.overlay) {
+            this.close();
+          }
+        };
+      }
+
+      close() {
+        this.modal.classList.toggle("active");
+      }
+
+      open(content) {
+        this.modal.classList.toggle("active");
+
+        this.overlay.append(content);
+      }
+    }
+
+    function getItems() {
+      const data = window.localStorage.getItem("cargo-items");
+
+      if (data) {
+        return JSON.parse(window.localStorage.getItem("cargo-items"));
+      }
+
+      return [];
+    }
+
+    function addItem(item) {
+      const items = getItems();
+
+      const newItems = [...items, item];
+
+      window.localStorage.setItem("cargo-items", JSON.stringify(newItems));
+
+      renderItems();
+    }
+
+    function addItems(items) {
+      window.localStorage.setItem("cargo-items", JSON.stringify(items));
+    }
+
+    function removeItem(index) {
+      const items = getItems();
+
+      items.splice(index, 1);
+
+      window.localStorage.setItem("cargo-items", JSON.stringify(items));
+
+      renderItems();
+    }
+
+    function renderItems() {
+      const tbody = document.getElementById("tbody");
+
+      const items = getItems();
+
+      console.log(items);
+
+      if (!items) return;
+
+      tbody.innerHTML = "";
+
+      items.forEach((item, index) => {
+        const itemContainer = document.createElement("tr");
+
+        itemContainer.innerHTML = `
+    <td>
+      <span class="title">${item.title}</span>
+    </td>
+    <td>
+      <span class="price">${item.price}</span>
+    </td>
+    <td>${item.amount}</td>
+    <td>
+      <span class="status ${item.status}">${item.status}</span>
+    </td>
+    `;
+
+        const removeButtonContainer = document.createElement("td");
+        const removeButton = document.createElement("button");
+        removeButton.innerHTML = "Remove";
+        removeButtonContainer.append(removeButton);
+
+        removeButton.onclick = () => removeItem(index);
+
+        itemContainer.append(removeButtonContainer);
+
+        tbody.append(itemContainer);
+      });
+    }
+
+    function FormComponent(onSubmit) {
+      const form = document.createElement("form");
+
+      form.innerHTML = `
+        <h2>Add Item</h2>
+
+        <label>
+          <span>Title</span>
+          <input name="title" minlength="3" type="text" placeholder="Very fancy title..." required  />
+        </label>
+
+        <label>
+          <span>Price</span>
+          <input name="price" pattern="^\\d+\\$" type="text" placeholder="10$" required />
+        </label>
+
+        <label>
+          <span>Amount</span>
+          <input name="amount" pattern="[0-9]+" type="text" placeholder="100" required  />
+        </label>
+
+        <label>
+          <span>Status</span>
+          <select name="status">
+            <option value="delivered">Delivered</option>
+            <option value="canceled">Canceled</option>
+            <option value="delivering">Delivering</option>
+          </select>
+        </label>
+
+        <button>Add</button>
+  `;
+
+      form.onsubmit = (e) => {
+        e.preventDefault();
+
+        const title = form.title.value;
+        const price = form.price.value;
+        const amount = form.amount.value;
+        const status = form.status.value;
+
+        const item = {
+          title,
+          price,
+          amount,
+          status,
+        };
+
+        addItem(item);
+
+        onSubmit();
+      };
+
+      return form;
+    }
+
+    function addButtonHandler(onClick) {
+      const button = document.getElementById("add-item");
+
+      button.onclick = () => onClick();
+    }
+
+    function addFileInputHandler(onUpload) {
+      const input = document.getElementById("file-input");
+
+      input.onchange = (e) => {
+        const file = e.target.files[0];
+
+        const reader = new FileReader();
+
+        reader.onload = function (e) {
+          const contents = e.target.result;
+          const jsonData = JSON.parse(contents);
+
+          onUpload(jsonData);
+        };
+
+        reader.readAsText(file);
+      };
+    }
+
+    function init() {
+      const modal = new Modal();
+      const form = FormComponent(() => modal.close());
+
+      renderItems();
+
+      addButtonHandler(() => modal.open(form));
+      addFileInputHandler((items) => {
+        addItems(items);
+
+        renderItems();
+      });
+    }
+
+    init();
+  </script>
+</html>

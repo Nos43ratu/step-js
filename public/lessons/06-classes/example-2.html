@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Example of task-1</title>
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      button {
+        padding: 4px;
+      }
+      .table {
+        display: flex;
+        flex-direction: column;
+        margin: 32px;
+        border: black 1px solid;
+        padding: 16px;
+      }
+      .title {
+        display: flex;
+        justify-content: space-between;
+      }
+      .grades {
+        margin-top: 16px;
+        display: flex;
+        gap: 8px;
+      }
+      .grade {
+        width: 48px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 4px;
+        border: black 1px solid;
+        padding: 4px;
+      }
+      .controls {
+        display: flex;
+        gap: 8px;
+        margin-top: 16px;
+      }
+    </style>
+  </head>
+  <body></body>
+
+  <script>
+    class Student {
+      constructor(name, surname, grades) {
+        this.name = name;
+        this.surname = surname;
+
+        this.grades = grades;
+      }
+
+      getFullName() {
+        return this.name + " " + this.surname;
+      }
+
+      addGrade(subject, mark) {
+        this.grades.push({
+          subject: subject,
+          mark: mark,
+        });
+      }
+
+      removeGrade(subject) {
+        const newGrades = this.grades.filter(function (grade) {
+          if (grade.subject === subject) {
+            return false;
+          }
+
+          return true;
+        });
+
+        this.grades = newGrades;
+      }
+
+      calculateGrades() {
+        const sum = this.grades.reduce(function (prev, curr) {
+          return prev + curr.mark;
+        }, 0);
+
+        return Math.round(sum / this.grades.length);
+      }
+    }
+
+    const adil = new Student("Adil", "Kairolla", [
+      {
+        subject: "js",
+        mark: 5,
+      },
+      {
+        subject: "css",
+        mark: 3,
+      },
+    ]);
+
+    class RenderTable {
+      constructor(student) {
+        this.student = student;
+
+        this.render();
+      }
+
+      render() {
+        document.body.innerHTML = "";
+        const table = this.createTable();
+
+        const title = this.createTitle();
+        const grades = this.createGrades();
+        const controls = this.createControls();
+
+        table.append(title);
+        table.append(grades);
+        table.append(controls);
+
+        document.body.append(table);
+      }
+
+      createTable() {
+        const table = document.createElement("div");
+        table.className = "table";
+
+        return table;
+      }
+
+      createTitle() {
+        const wrapper = document.createElement("div");
+        wrapper.className = "title";
+
+        const name = document.createElement("h1");
+        name.innerHTML = this.student.getFullName();
+        wrapper.append(name);
+
+        const avgGrade = document.createElement("h2");
+        avgGrade.innerHTML = "avg score: " + this.student.calculateGrades();
+        wrapper.append(avgGrade);
+
+        return wrapper;
+      }
+
+      createGrades() {
+        const grades = document.createElement("div");
+        grades.className = "grades";
+
+        for (let grade of this.student.grades) {
+          const wrapper = document.createElement("div");
+          wrapper.className = "grade";
+          const subject = document.createElement("span");
+          subject.innerHTML = grade.subject;
+          const mark = document.createElement("span");
+          mark.innerHTML = grade.mark;
+          wrapper.append(subject);
+          wrapper.append(mark);
+
+          grades.append(wrapper);
+        }
+
+        return grades;
+      }
+
+      createControls() {
+        const controls = document.createElement("div");
+        controls.className = "controls";
+
+        const add = document.createElement("button");
+        add.innerHTML = "add";
+        add.addEventListener(
+          "click",
+          function () {
+            const subject = prompt("Enter subject");
+            const mark = prompt("Enter mark");
+
+            this.student.addGrade(subject, parseInt(mark));
+
+            this.render();
+          }.bind(this)
+        );
+        controls.append(add);
+
+        const remove = document.createElement("button");
+        remove.innerHTML = "remove";
+
+        remove.addEventListener(
+          "click",
+          function () {
+            const subject = prompt("Enter subject");
+
+            this.student.removeGrade(subject);
+
+            this.render();
+          }.bind(this)
+        );
+        controls.append(remove);
+
+        return controls;
+      }
+    }
+
+    new RenderTable(adil);
+  </script>
+</html>
