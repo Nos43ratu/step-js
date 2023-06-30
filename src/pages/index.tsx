@@ -1,12 +1,13 @@
-import { Layout } from "@/features/layout";
 import { LessonList } from "@/features/lesson";
 
 import { Seo } from "@/entities/seo";
+import { Header } from "@/entities/header";
 
 import { get_lessons } from "@/shared/api";
+import { Layout } from "@/shared/ui";
 
 type HomePageProps = {
-  lessons: ParsedLesson[];
+  lessons: ParsedMd[];
 };
 
 const PAGE_META = {
@@ -18,12 +19,16 @@ function HomePage({ lessons }: HomePageProps) {
     <Layout>
       <Seo meta={PAGE_META} />
 
-      <LessonList lessons={lessons} />
+      <Header />
+
+      <Layout.Container>
+        <LessonList lessons={lessons} />
+      </Layout.Container>
     </Layout>
   );
 }
 
-async function getServerSideProps() {
+async function getServerSideProps(): Promise<{ props: HomePageProps }> {
   const lessons = await get_lessons();
 
   return {

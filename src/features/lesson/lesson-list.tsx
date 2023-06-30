@@ -5,7 +5,7 @@ import { Card } from "@/entities/card";
 import { Wrap } from "@/entities/wrap";
 
 type LessonListProps = {
-  lessons: ParsedLesson[];
+  lessons: ParsedMd[];
 };
 
 export function LessonList({ lessons }: LessonListProps) {
@@ -19,13 +19,16 @@ export function LessonList({ lessons }: LessonListProps) {
         >
           <header className="border-b-2 border-gray-600 pb-2 lg:pb-4">
             <Wrap
-              condition={!!lesson.data.link}
+              condition={!!lesson.meta.frontmatter?.link}
               wrapper={
-                <Link href={lesson.data.link} className="text-indigo-500" />
+                <Link
+                  href={lesson.meta.frontmatter?.link ?? ""}
+                  className="text-indigo-500"
+                />
               }
             >
               <h2 className="font-bold text-base md:text-2xl">
-                {lesson.data.title}
+                {lesson.meta.frontmatter?.title}
               </h2>
             </Wrap>
           </header>
@@ -34,7 +37,9 @@ export function LessonList({ lessons }: LessonListProps) {
             <RenderMd content={lesson.content}></RenderMd>
           </div>
 
-          <footer className="text-gray-600 text-sm">{lesson.data.date}</footer>
+          <footer className="text-gray-600 text-sm">
+            {lesson.meta.frontmatter?.date}
+          </footer>
         </Card>
       ))}
     </section>

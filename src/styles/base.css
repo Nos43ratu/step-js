@@ -1,1 +1,13 @@
 @tailwind base;
+
+@layer base {
+  :root {
+    --card-shadow-color: theme("colors.gray.800");
+  }
+
+  html,
+  body,
+  #__next {
+    height: 100%;
+  }
+}

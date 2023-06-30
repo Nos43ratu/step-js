@@ -14,14 +14,20 @@ module.exports = plugin(function ({ matchUtilities, theme }) {
   };
 
   matchUtilities(
-    Object.fromEntries(
-      Object.entries(shadowSizes).map(([key, value]) => [
-        `shadow-box-${key}`,
-        (colorValue) => ({
-          boxShadow: `${value}px ${value}px 0px 0px ${colorValue}`,
-        }),
-      ])
-    ),
+    {
+      "card-shadow": (sizeValue) => ({
+        boxShadow: `${sizeValue}px ${sizeValue}px 0px 0px var(--card-shadow-color)`,
+      }),
+    },
+    { values: shadowSizes, type: "relative-size" }
+  );
+
+  matchUtilities(
+    {
+      "card-shadow": (colorValue) => ({
+        "--card-shadow-color": `${colorValue}`,
+      }),
+    },
     { values: flattenColorPalette(theme("boxShadowColor")), type: "color" }
   );
 });

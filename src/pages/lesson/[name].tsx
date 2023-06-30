@@ -1,8 +1,8 @@
-import { Layout } from "@/features/layout";
 import { get_lesson } from "@/shared/api";
 import { GetServerSideProps } from "next";
 import { Card } from "@/entities/card";
 import { RenderMd } from "@/entities/render-md";
+import { Layout } from "@/shared/ui";
 
 type LessonPageProps = {
   lesson: any;
@@ -11,12 +11,13 @@ type LessonPageProps = {
 function LessonPage({ lesson }: LessonPageProps) {
   return (
     <Layout>
-      <Card
-        className="flex flex-col max-w-3xl mx-auto w-full space-y-5 lg:space-y-8 xl:space-y-12 px-4"
-        hover={false}
-      >
-        <RenderMd content={lesson.content} />
-      </Card>
+      <Layout.Container>
+        <div className="flex flex-col max-w-3xl mx-auto w-full ">
+          <Card className="px-4" hover={false}>
+            <RenderMd content={lesson.content} />
+          </Card>
+        </div>
+      </Layout.Container>
     </Layout>
   );
 }

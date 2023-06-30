@@ -10,7 +10,8 @@ module.exports = {
   theme: {
     extend: {
       backgroundImage: {
-        grid: `linear-gradient(${colors.sky["100"]} 1px, transparent 1px), linear-gradient(to right, ${colors.sky["100"]} 1px, ${colors.sky["50"]} 1px)`,
+        "grid-light": `linear-gradient(${colors.sky["100"]} 1px, transparent 1px), linear-gradient(to right, ${colors.sky["100"]} 1px, ${colors.sky["50"]} 1px)`,
+        "grid-dark": `linear-gradient(${colors.sky["100"]} 1px, transparent 1px), linear-gradient(to right, ${colors.sky["100"]} 1px, ${colors.gray["800"]} 1px)`,
       },
       backgroundSize: {
         lg: "20px 20px",
@@ -25,6 +26,6 @@ module.exports = {
     require("@tailwindcss/forms"),
     require("@tailwindcss/aspect-ratio"),
     require("@tailwindcss/container-queries"),
-    require("./src/shared/utilities/plugins-tailwind/shadow_box.js"),
+    require("./src/shared/utilities/plugins-tailwind/card-shadow.js"),
   ],
 };
