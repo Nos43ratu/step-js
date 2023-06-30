@@ -23,3 +23,11 @@ export async function get_lesson(name: string): Promise<ParsedMd> {
 
   return parse_md(lesson_raw_data.toString());
 }
+
+export async function get_lesson_code(name: string): Promise<ParsedMd> {
+  const lesson_raw_data = await fs.promises.readFile(
+    `public/lessons/${name}/code.md`
+  );
+
+  return parse_md(lesson_raw_data.toString());
+}

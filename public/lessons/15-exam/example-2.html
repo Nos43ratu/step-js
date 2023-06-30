@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en" class="min-h-full">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Exam - task 2</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+            href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;1,400;1,500;1,700&display=swap"
+            rel="stylesheet"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        * {
+            font-family: "Roboto", sans-serif;
+        }
+
+        [type="checkbox"],
+        [type="radio"] {
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            padding: 0;
+            -webkit-print-color-adjust: exact;
+            color-adjust: exact;
+            display: inline-block;
+            vertical-align: middle;
+            background-origin: border-box;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            user-select: none;
+            flex-shrink: 0;
+            height: 1rem;
+            width: 1rem;
+            color: #2563eb;
+            background-color: #fff;
+            border-color: #6b7280;
+            border-width: 1px;
+            --tw-shadow: 0 0 #0000;
+        }
+
+        [type="checkbox"] {
+            border-radius: 0px;
+        }
+
+        [type="radio"] {
+            border-radius: 100%;
+        }
+
+        [type="checkbox"]:focus,
+        [type="radio"]:focus {
+            outline: 2px solid transparent;
+            outline-offset: 2px;
+            --tw-ring-inset: var(--tw-empty, /*!*/ /*!*/);
+            --tw-ring-offset-width: 2px;
+            --tw-ring-offset-color: #fff;
+            --tw-ring-color: #2563eb;
+            --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0
+            var(--tw-ring-offset-width) var(--tw-ring-offset-color);
+            --tw-ring-shadow: var(--tw-ring-inset) 0 0 0
+            calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);
+            box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow),
+            var(--tw-shadow);
+        }
+
+        [type="checkbox"]:checked,
+        [type="radio"]:checked {
+            border-color: transparent;
+            background-color: currentColor;
+            background-size: 100% 100%;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        [type="checkbox"]:checked {
+            background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='white' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M12.207 4.793a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0l-2-2a1 1 0 011.414-1.414L6.5 9.086l4.293-4.293a1 1 0 011.414 0z'/%3e%3c/svg%3e");
+        }
+
+        [type="radio"]:checked {
+            background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='white' xmlns='http://www.w3.org/2000/svg'%3e%3ccircle cx='8' cy='8' r='3'/%3e%3c/svg%3e");
+        }
+
+        [type="checkbox"]:checked:hover,
+        [type="checkbox"]:checked:focus,
+        [type="radio"]:checked:hover,
+        [type="radio"]:checked:focus {
+            border-color: transparent;
+            background-color: currentColor;
+        }
+
+        [type="checkbox"]:indeterminate {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 16 16'%3e%3cpath stroke='white' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M4 8h8'/%3e%3c/svg%3e");
+            border-color: transparent;
+            background-color: currentColor;
+            background-size: 100% 100%;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        [type="checkbox"]:indeterminate:hover,
+        [type="checkbox"]:indeterminate:focus {
+            border-color: transparent;
+            background-color: currentColor;
+        }
+    </style>
+</head>
+
+<body class="h-full bg-emerald-100">
+<main class="h-full px-6 py-8 flex flex-col space-y-8">
+    <div class="flex items-center justify-between">
+        <h1 class="text-3xl font-bold">Expense calculator</h1>
+
+        <button
+                id="add-item"
+                class="flex items-center rounded-lg bg-emerald-600 px-4 py-3 text-base font-semibold text-white shadow-sm hover:bg-emerald-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-600"
+        >
+            Add task
+        </button>
+    </div>
+
+    <div
+            class="overflow-hidden shadow shadow-emerald-600 ring-1 ring-emerald-500 ring-opacity-5 rounded-lg"
+    >
+        <table class="min-w-full divide-y divide-emerald-300">
+            <thead class="bg-emerald-200">
+            <tr>
+                <th
+                        scope="col"
+                        class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6"
+                >
+                    Name
+                </th>
+                <th
+                        scope="col"
+                        class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+                >
+                    Price
+                </th>
+                <th
+                        scope="col"
+                        class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+                >
+                    Type
+                </th>
+                <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-6">
+                    <span class="sr-only">Edit</span>
+                </th>
+            </tr>
+            </thead>
+            <tbody class="divide-y divide-emerald-200 bg-emerald-50"></tbody>
+        </table>
+    </div>
+
+    <div
+            id="total"
+            class="flex flex flex-col bg-white rounded-lg w-[160px] py-2 px-3 border-2 border-emerald-300"
+    >
+        <h2 class="text-lg font-bold">Total</h2>
+
+        <p class="text-xl font-bold">$0</p>
+    </div>
+</main>
+</body>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+<script>
+    function _0xd41b(){const _0x453baf=['preventDefault','DACgq','getItem','push','type','\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</td>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<td\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20class=\x22relative\x20whitespace-nowrap\x20py-4\x20pl-3\x20pr-4\x20text-right\x20text-sm\x20font-medium\x20sm:pr-6\x22\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<button\x20class=\x22text-green-600\x20hover:text-emerald-900\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20Delete<span\x20class=\x22sr-only\x22></span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</a>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</td>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</tr>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20','find','3808854MfJApA','GKVQM','DRSkW','68131tvMdUy','remove','flex','UCEYf','val','Eibeb','ready','2242128LUIgQQ','CXCYw','append','hTYvH','form','\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</td>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<td\x20class=\x22whitespace-nowrap\x20px-3\x20py-4\x20text-sm\x20text-gray-500\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20','parse','center','input[name=price]','target','button','niOcM','\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<tr>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<td\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20class=\x22whitespace-nowrap\x20py-4\x20pl-4\x20pr-3\x20text-sm\x20font-medium\x20text-gray-900\x20sm:pl-6\x22\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20','css','stringify','forEach','setItem','570GEQXoU','IvynQ','table\x20tbody','SRzXX','2260710qDgXfX','12673350sVQWOs','title','12725ROUCvV','empty','price','fixed','click','submit','32DxXTep','wmXKb','303024CXdddr','#add-item','reduce','#total\x20p','JPNMY','\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22modal\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<form\x20class=\x22flex\x20flex-col\x20p-6\x20space-y-4\x20bg-white\x20rounded-md\x20shadow-md\x20w-[320px]\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<h2\x20class=\x22font-bold\x20text-2xl\x22>Add\x20task</h2>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22flex\x20flex-col\x20w-full\x20space-y-2\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20<label\x20class=\x22flex\x20flex-col\x20space-y-px\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span\x20class=\x22text-xs\x20font-medium\x20text-emerald-900\x22>Title</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<input\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20type=\x22text\x22\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20name=\x22title\x22\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20placeholder=\x22Task\x20title\x22\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20class=\x22w-full\x20rounded-md\x20border-0\x20py-1.5\x20px-3\x20text-emerald-900\x20shadow-sm\x20ring-2\x20ring-inset\x20ring-emerald-300\x20placeholder:text-emerald-200\x20focus:ring-2\x20focus:ring-inset\x20focus:ring-emerald-600\x20sm:text-sm\x20sm:leading-6\x20focus-visible:outline-none\x22\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20required\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20/>\x0a\x20\x20\x20\x20\x20\x20\x20\x20</label>\x0a\x0a\x20\x20\x20\x20\x20\x20\x20\x20<label\x20class=\x22flex\x20flex-col\x20space-y-px\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span\x20class=\x22text-xs\x20font-medium\x20text-emerald-900\x22>Price</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<input\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20type=\x22number\x22\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20name=\x22price\x22\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20placeholder=\x22Price\x22\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20class=\x22w-full\x20rounded-md\x20border-0\x20py-1.5\x20px-3\x20text-emerald-900\x20shadow-sm\x20ring-2\x20ring-inset\x20ring-emerald-300\x20placeholder:text-emerald-200\x20focus:ring-2\x20focus:ring-inset\x20focus:ring-emerald-600\x20sm:text-sm\x20sm:leading-6\x20focus-visible:outline-none\x22\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20required\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20/>\x0a\x20\x20\x20\x20\x20\x20\x20\x20</label>\x0a\x20\x20\x20\x20\x20\x20\x20\x20<label\x20class=\x22flex\x20flex-col\x20space-y-px\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span\x20class=\x22text-xs\x20font-medium\x20text-emerald-900\x22>Type</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<select\x20name=\x22type\x22\x20class=\x22w-full\x20rounded-md\x20border-0\x20py-1.5\x20px-3\x20text-emerald-900\x20shadow-sm\x20ring-2\x20ring-inset\x20ring-emerald-300\x20placeholder:text-emerald-200\x20focus:ring-2\x20focus:ring-inset\x20focus:ring-emerald-600\x20sm:text-sm\x20sm:leading-6\x20focus-visible:outline-none\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<option\x20value=\x22food\x22>Food</option>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<option\x20value=\x22transport\x22>Transport</option>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<option\x20value=\x22other\x22>Other</option>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</select>\x0a\x20\x20\x20\x20\x20\x20\x20\x20</label>\x0a\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20<button\x0a\x20\x20\x20\x20\x20\x20\x20\x20id=\x22add-task\x22\x0a\x20\x20\x20\x20\x20\x20\x20\x20type=\x22submit\x22\x0a\x20\x20\x20\x20\x20\x20\x20\x20class=\x22flex\x20items-center\x20justify-center\x20rounded-md\x20bg-emerald-600\x20px-3\x20py-2\x20text-sm\x20font-semibold\x20text-white\x20shadow-sm\x20hover:bg-emerald-500\x20focus-visible:outline\x20focus-visible:outline-2\x20focus-visible:outline-offset-2\x20focus-visible:outline-emerald-600\x22\x0a\x20\x20\x20\x20\x20\x20>\x0a\x20\x20\x20\x20\x20\x20\x20\x20Add\x20task\x0a\x20\x20\x20\x20\x20\x20</button>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</form>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20','rgba(0,\x200,\x200,\x200.5)','text'];_0xd41b=function(){return _0x453baf;};return _0xd41b();}const _0x40c0a4=_0x4cee;(function(_0x4481d8,_0x35bd9e){const _0x1d542f=_0x4cee,_0x29f69a=_0x4481d8();while(!![]){try{const _0x2b641a=parseInt(_0x1d542f(0x156))/0x1+-parseInt(_0x1d542f(0x172))/0x2+parseInt(_0x1d542f(0x17d))/0x3*(parseInt(_0x1d542f(0x17b))/0x4)+parseInt(_0x1d542f(0x175))/0x5*(parseInt(_0x1d542f(0x16e))/0x6)+-parseInt(_0x1d542f(0x153))/0x7+-parseInt(_0x1d542f(0x15d))/0x8+parseInt(_0x1d542f(0x173))/0x9;if(_0x2b641a===_0x35bd9e)break;else _0x29f69a['push'](_0x29f69a['shift']());}catch(_0x9fd63f){_0x29f69a['push'](_0x29f69a['shift']());}}}(_0xd41b,0x8b7f1));const ls_key='items',getItems=()=>{const _0x24ecf5=_0x4cee,_0x4b2e87=localStorage['getItem'](ls_key);if(!_0x4b2e87)return[];try{if(_0x24ecf5(0x16f)==='SbcSY'){const _0x596256=_0x54ac1e(),_0x283087=_0x6efd80('table\x20tbody');_0x283087['empty'](),_0x596256[_0x24ecf5(0x16c)]((_0x50e2e5,_0x56b51a)=>{const _0x2e4781=_0x24ecf5,_0x4f677a=_0x53cf7b('\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<tr>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<td\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20class=\x22whitespace-nowrap\x20py-4\x20pl-4\x20pr-3\x20text-sm\x20font-medium\x20text-gray-900\x20sm:pl-6\x22\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20'+_0x50e2e5[_0x2e4781(0x174)]+_0x2e4781(0x162)+_0x50e2e5[_0x2e4781(0x177)]+_0x2e4781(0x162)+_0x50e2e5[_0x2e4781(0x150)]+_0x2e4781(0x151));_0x4f677a[_0x2e4781(0x152)](_0x2e4781(0x167))[_0x2e4781(0x179)](()=>{_0x13ce51(_0x56b51a),_0x251cdf();}),_0x283087[_0x2e4781(0x15f)](_0x4f677a),_0x5640a3(_0x2e4781(0x180))[_0x2e4781(0x14b)]('$'+_0x596256[_0x2e4781(0x17f)]((_0x4e311a,_0x5239e4)=>_0x4e311a+_0xfb4c45(_0x5239e4[_0x2e4781(0x177)]),0x0));});}else return JSON['parse'](_0x4b2e87);}catch(_0x327780){if(_0x24ecf5(0x17c)!==_0x24ecf5(0x160))return[];else _0xdfb840(_0x41edb5),_0x2a9044();}},addItem=_0x2e272a=>{const _0x52c2d5=_0x4cee,_0x3b8f55=getItems();_0x3b8f55[_0x52c2d5(0x14f)](_0x2e272a),localStorage[_0x52c2d5(0x16d)](ls_key,JSON[_0x52c2d5(0x16b)](_0x3b8f55));},deleteItem=_0x50764e=>{const _0x599ba0=_0x4cee,_0x5c6940=getItems();localStorage[_0x599ba0(0x16d)](ls_key,JSON['stringify'](_0x5c6940['filter']((_0x5d0805,_0x52d1d9)=>_0x52d1d9!==_0x50764e)));};function renderTable(){const _0x10aed2=_0x4cee,_0x59da47=getItems(),_0x1953b2=$(_0x10aed2(0x170));_0x1953b2[_0x10aed2(0x176)](),_0x59da47[_0x10aed2(0x16c)]((_0x3b1c0d,_0x5df055)=>{const _0x2a5dc8=_0x10aed2;if('DRSkW'!==_0x2a5dc8(0x155))return _0x319555['parse'](_0x1c6e7f);else{const _0x526b2e=$('\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<tr>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<td\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20class=\x22whitespace-nowrap\x20py-4\x20pl-4\x20pr-3\x20text-sm\x20font-medium\x20text-gray-900\x20sm:pl-6\x22\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20'+_0x3b1c0d[_0x2a5dc8(0x174)]+_0x2a5dc8(0x162)+_0x3b1c0d[_0x2a5dc8(0x177)]+_0x2a5dc8(0x162)+_0x3b1c0d[_0x2a5dc8(0x150)]+_0x2a5dc8(0x151));_0x526b2e['find'](_0x2a5dc8(0x167))[_0x2a5dc8(0x179)](()=>{const _0x40acd7=_0x2a5dc8;_0x40acd7(0x159)!=='UCEYf'?_0x146621['target']===_0x3453c4[0x0]&&_0x29fb0b[_0x40acd7(0x157)]():(deleteItem(_0x5df055),renderTable());}),_0x1953b2[_0x2a5dc8(0x15f)](_0x526b2e),$(_0x2a5dc8(0x180))['text']('$'+_0x59da47[_0x2a5dc8(0x17f)]((_0x9cd372,_0x314d78)=>_0x9cd372+Number(_0x314d78[_0x2a5dc8(0x177)]),0x0));}});}function _0x4cee(_0x5cd8d0,_0x46be6a){const _0xd41bc5=_0xd41b();return _0x4cee=function(_0x4cee02,_0x4bec02){_0x4cee02=_0x4cee02-0x14a;let _0x2b88c3=_0xd41bc5[_0x4cee02];return _0x2b88c3;},_0x4cee(_0x5cd8d0,_0x46be6a);}$(document)[_0x40c0a4(0x15c)](()=>{const _0x10b5d6=_0x40c0a4;renderTable(),$(_0x10b5d6(0x17e))[_0x10b5d6(0x179)](()=>{const _0x1d6b4f=_0x10b5d6;if(_0x1d6b4f(0x15b)!==_0x1d6b4f(0x181)){const _0xb2ffa5=$(_0x1d6b4f(0x182))[_0x1d6b4f(0x16a)]({'position':_0x1d6b4f(0x178),'top':0x0,'left':0x0,'right':0x0,'bottom':0x0,'display':_0x1d6b4f(0x158),'justifyContent':_0x1d6b4f(0x164),'alignItems':'center','backgroundColor':_0x1d6b4f(0x14a)});_0xb2ffa5[_0x1d6b4f(0x179)](_0x1f8024=>{const _0x1735ce=_0x1d6b4f;if(_0x1735ce(0x171)===_0x1735ce(0x15e)){const _0x43f7c4=_0x10835c[_0x1735ce(0x14e)](_0x467b55);if(!_0x43f7c4)return[];try{return _0x44e698[_0x1735ce(0x163)](_0x43f7c4);}catch(_0x3f8dc5){return[];}}else{if(_0x1f8024['target']===_0xb2ffa5[0x0]){if(_0x1735ce(0x154)!==_0x1735ce(0x14d))_0xb2ffa5[_0x1735ce(0x157)]();else{_0x316a79[_0x1735ce(0x14c)]();const _0x54ccac=_0x2f0a8c(_0x45d1fb[_0x1735ce(0x166)]),_0x131809={'title':_0x54ccac[_0x1735ce(0x152)]('input[name=title]')['val'](),'price':_0x54ccac['find'](_0x1735ce(0x165))[_0x1735ce(0x15a)](),'type':_0x54ccac[_0x1735ce(0x152)]('select[name=type]')['val']()};_0x3eb448(_0x131809),_0x4aca0e(),_0x42072e[_0x1735ce(0x157)]();}}}}),_0xb2ffa5['children'](_0x1d6b4f(0x161))[_0x1d6b4f(0x17a)](_0x174978=>{const _0x2f7911=_0x1d6b4f;if(_0x2f7911(0x168)===_0x2f7911(0x168)){_0x174978[_0x2f7911(0x14c)]();const _0x2446e8=$(_0x174978[_0x2f7911(0x166)]),_0xe2d2b0={'title':_0x2446e8[_0x2f7911(0x152)]('input[name=title]')[_0x2f7911(0x15a)](),'price':_0x2446e8['find'](_0x2f7911(0x165))[_0x2f7911(0x15a)](),'type':_0x2446e8[_0x2f7911(0x152)]('select[name=type]')[_0x2f7911(0x15a)]()};addItem(_0xe2d2b0),renderTable(),_0xb2ffa5[_0x2f7911(0x157)]();}else{const _0x17abb8=_0x5f196e();_0x17abb8[_0x2f7911(0x14f)](_0x4b3ecf),_0x435199[_0x2f7911(0x16d)](_0x460e3a,_0x358e70[_0x2f7911(0x16b)](_0x17abb8));}}),$('body')[_0x1d6b4f(0x15f)](_0xb2ffa5);}else{const _0x2c54fe=_0x225abc(_0x1d6b4f(0x169)+_0x585719[_0x1d6b4f(0x174)]+_0x1d6b4f(0x162)+_0x1c9c92[_0x1d6b4f(0x177)]+_0x1d6b4f(0x162)+_0xe39d3a[_0x1d6b4f(0x150)]+_0x1d6b4f(0x151));_0x2c54fe[_0x1d6b4f(0x152)](_0x1d6b4f(0x167))[_0x1d6b4f(0x179)](()=>{_0x441f17(_0x147ff4),_0x114993();}),_0xf9a5be[_0x1d6b4f(0x15f)](_0x2c54fe),_0x4b9e5d(_0x1d6b4f(0x180))[_0x1d6b4f(0x14b)]('$'+_0xe4dc8a[_0x1d6b4f(0x17f)]((_0x53c899,_0x16ce4e)=>_0x53c899+_0x4dc639(_0x16ce4e['price']),0x0));}});});
+</script>
+</html>

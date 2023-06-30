@@ -1,7 +1,7 @@
 # Задание
 
 В этом задании нужно реализовать список студентов с возможностью добавления новых студентов и удаления старых. Используя jquery
-[Пример](/examples/13-jquery/example-1)
+[Пример](/example/13-jquery/example-1)
 
 ```html
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>

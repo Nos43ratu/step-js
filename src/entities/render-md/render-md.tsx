@@ -32,6 +32,9 @@ export function RenderMd({ content }: RenderMdProps) {
             {props.children}
           </h3>
         ),
+        h4: ({ node, ...props }) => (
+          <h4 className="text-xl font-bold">{props.children}</h4>
+        ),
         p: ({ node, ...props }) => (
           <p className="text-lg mb-4 ">{props.children}</p>
         ),
