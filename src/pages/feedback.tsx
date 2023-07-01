@@ -18,7 +18,7 @@ function FeedbackPage() {
   const handleSubmit: FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
 
-    fetch("/step/api/feedback", {
+    fetch("http://feedback_bot:4000/feedback", {
       method: "POST",
       body: JSON.stringify({ feedback, date: dateStr }),
     });
