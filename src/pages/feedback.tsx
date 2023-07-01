@@ -49,7 +49,7 @@ function FeedbackPage() {
                 onChange={(e) => setFeedback(e.target.value)}
               />
 
-              <button type="button" className="text-indigo-500">
+              <button type="submit" className="text-indigo-500">
                 Отправить
               </button>
             </form>
