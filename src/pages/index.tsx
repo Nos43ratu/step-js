@@ -3,8 +3,8 @@ import { LessonList } from "@/features/lesson";
 import { Seo } from "@/entities/seo";
 import { Header } from "@/entities/header";
 
-import { get_lessons } from "@/shared/api";
 import { Layout } from "@/shared/ui";
+import { get_lessons } from "@/shared/api/api_server";
 
 type HomePageProps = {
   lessons: ParsedMd[];

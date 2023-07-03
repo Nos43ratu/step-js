@@ -1,10 +1,10 @@
-import { get_lesson } from "@/shared/api";
 import { GetServerSideProps } from "next";
 import { Card } from "@/entities/card";
 import { RenderMd } from "@/entities/render-md";
 import { Layout } from "@/shared/ui";
 import { Seo } from "@/entities/seo";
 import { Header } from "@/entities/header";
+import { get_lesson } from "@/shared/api/api_server";
 
 type LessonPageProps = {
   lesson: any;

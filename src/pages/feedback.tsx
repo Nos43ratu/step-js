@@ -1,31 +1,31 @@
-import { FormEventHandler, useState } from "react";
-import { Seo } from "@/entities/seo";
-import { Header } from "@/entities/header";
+import { FormEvent, useRef } from "react";
 import { Layout } from "@/shared/ui";
 import { Card } from "@/entities/card";
+import { get_date } from "@/shared/utilities/get_date";
+import { send_feedback } from "@/shared/api/api_client";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function FeedbackPage() {
-  const [feedback, setFeedback] = useState("");
-  //create date in hh:mm dd/mm format
-  const date = new Date();
-  const hours = date.getHours();
-  const minutes = date.getMinutes();
-  const day = date.getDate();
-  const month = date.getMonth() + 1;
-  const year = date.getFullYear();
-  const dateStr = `${hours}:${minutes} ${day}.${month}.${year}`;
+  const formRef = useRef<HTMLFormElement>(null);
 
-  const handleSubmit: FormEventHandler<HTMLFormElement> = (e) => {
+  async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
-    fetch("http://feedback_bot:4000/feedback", {
-      method: "POST",
-      body: JSON.stringify({ feedback, date: dateStr }),
-    });
-  };
+    const data = new FormData(e.currentTarget);
+
+    const { feedback } = Object.fromEntries(data);
+    const date = get_date();
+
+    await send_feedback({ feedback: String(feedback), date });
+
+    formRef.current?.reset();
+    toast("Спасибо за отзыв!");
+  }
 
   return (
     <Layout>
+      <ToastContainer />
       <Layout.Container>
         <div className="flex flex-col max-w-lg mx-auto w-full px-4">
           <Card className="p-4 flex flex-col space-y-4" hover={false}>
@@ -42,12 +42,12 @@ function FeedbackPage() {
                 Что было плохо, а что хорошо?
               </p>
             </div>
-            <form className="flex flex-col space-y-2" onSubmit={handleSubmit}>
-              <textarea
-                className="h-32"
-                value={feedback}
-                onChange={(e) => setFeedback(e.target.value)}
-              />
+            <form
+              ref={formRef}
+              className="flex flex-col space-y-2"
+              onSubmit={handleSubmit}
+            >
+              <textarea name="feedback" className="h-32" />
 
               <button type="submit" className="text-indigo-500">
                 Отправить

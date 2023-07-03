@@ -1,10 +1,10 @@
 import { GetServerSideProps } from "next";
-import { get_lesson, get_lesson_code } from "@/shared/api";
 import { Seo } from "@/entities/seo";
 import { Header } from "@/entities/header";
 import { Layout } from "@/shared/ui";
 import { Card } from "@/entities/card";
 import { RenderMd } from "@/entities/render-md";
+import { get_lesson_code } from "@/shared/api/api_server";
 
 type CodePageProps = {
   code: ParsedMd;
