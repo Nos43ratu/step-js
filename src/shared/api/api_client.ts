@@ -7,9 +7,6 @@ export async function send_feedback(body: Feedback): Promise<boolean> {
   try {
     await fetch("/step/api/feedback", {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
       body: JSON.stringify(body),
     });
 
