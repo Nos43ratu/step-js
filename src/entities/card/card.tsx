@@ -20,7 +20,7 @@ export function Card({
   hover = true,
   as = "div",
   children,
-}: CardProps) {
+}: CardProps): JSX.Element {
   const [rand_color, set_rand_color] = useState("");
 
   useEffect(() => {

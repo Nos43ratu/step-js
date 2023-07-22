@@ -1,6 +1,7 @@
-import { Roboto_Mono } from "next/font/google";
 import clsx from "clsx";
-import { PropsWithChildren } from "react";
+import { Roboto_Mono } from "next/font/google";
+
+import type { PropsWithChildren } from "react";
 
 const robot = Roboto_Mono({
   weight: ["100", "300", "400", "500", "700"],
